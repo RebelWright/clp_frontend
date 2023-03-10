@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductById, getProduct } from '../slices/product.slice';
-import { addToast } from '../slices/toasts.slice';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductById, getProduct } from "../slices/product.slice";
+import { addToast } from "../slices/toasts.slice";
+import { useParams } from "react-router-dom";
 import "./Product.css";
-
-
+import Button from "../Button/Button";
 
 const Product: React.FC<any> = () => {
   const dispatch = useDispatch<any>();
@@ -13,8 +12,13 @@ const Product: React.FC<any> = () => {
   const product = useSelector(getProduct);
 
   const handleOrderClick = (productName: any) => {
-  dispatch(addToast({ message: `${productName} has been ordered`, status: "success" }));
-};
+    dispatch(
+      addToast({
+        message: `${productName} has been ordered`,
+        status: "success",
+      })
+    );
+  };
 
   useEffect(() => {
     dispatch(fetchProductById(productId));
@@ -34,9 +38,10 @@ const Product: React.FC<any> = () => {
           <p>Price: {product.price}</p>
         </div>
       </div>
-      <button onClick={() => handleOrderClick(product.productName)}>Order</button>
+      <Button onClick={() => handleOrderClick(product.productName)}>
+        Order
+      </Button>
     </div>
-
   );
 };
 

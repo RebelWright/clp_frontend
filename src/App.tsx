@@ -10,28 +10,28 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
 function App() {
-	const dispatch = useDispatch<any>();
-	const user = useSelector(getUser);
+  const dispatch = useDispatch<any>();
+  const user = useSelector(getUser);
 
-	useEffect(() => {
-		dispatch(setUser());
-	}, []); // eslint-disable-line
+  useEffect(() => {
+    dispatch(setUser());
+  }, []); // eslint-disable-line
 
-
-	return (
-		<Routes>
-			<Route path="" element={<Layout />}>
-				<Route index element={<Home />} />
-				<Route path="login" element={<Login />} />
-				<Route path="register" element={<Register />} />
-				<Route path="products">
-					<Route index element={<Products />} />
-					<Route path=":productId" element={<Product />} />
-				</Route>*
-				<Route path="*" element={<Navigate to="" />} />
-			</Route>
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path="" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="products">
+          <Route index element={<Products />} />
+          <Route path=":productId" element={<Product />} />
+        </Route>
+        *
+        <Route path="*" element={<Navigate to="" />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

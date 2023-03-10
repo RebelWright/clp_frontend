@@ -1,4 +1,4 @@
-export{}/*import React, { useEffect } from "react";
+export {}; /*import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewOrder, addProductToOrder, removeProductFromOrder, placeOrder, getOrderById } from "../slices/orders.slice";
 import { RootState } from '../store/store';
@@ -34,16 +34,16 @@ const Order = ({ userId }: { userId: number }) => {
             {order.products.map((product: any) => (
               <li key={product.id}>
                 {product.name} - {product.price}
-                <button onClick={() => handleRemoveProductFromOrder(order.id, product)}>
+                <Button onClick={() => handleRemoveProductFromOrder(order.id, product)}>
                   Remove
                 </button>
-                <button onClick={() => handleAddProductToOrder(order.id, product)}>
+                <Button onClick={() => handleAddProductToOrder(order.id, product)}>
                   Add Product
                 </button>
               </li>
             ))}
           </ul>
-          <button onClick={() => handlePlaceOrder(order.id)}>Place Order</button>
+          <Button onClick={() => handlePlaceOrder(order.id)}>Place Order</button>
         </div>
       )}
     </div>

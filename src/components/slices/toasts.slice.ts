@@ -2,27 +2,27 @@ import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
 const initialState: any = {
-	toasts: [],
+  toasts: [],
 };
 
 // create toast slice
 const toastsSlice = createSlice({
-	name: "toasts",
-	initialState,
-	reducers: {
-		addToast(state, action) {
-			state.toasts.push({ id: nanoid(), ...action.payload });
-		},
-		removeToast(state, action) {
-			const newToasts = [];
-			for (const toast of state.toasts) {
-				if (toast?.id !== action.payload) {
-					newToasts.push(toast);
-				}
-			}
-			state.toasts = newToasts;
-		},
-	},
+  name: "toasts",
+  initialState,
+  reducers: {
+    addToast(state, action) {
+      state.toasts.push({ id: nanoid(), ...action.payload });
+    },
+    removeToast(state, action) {
+      const newToasts = [];
+      for (const toast of state.toasts) {
+        if (toast?.id !== action.payload) {
+          newToasts.push(toast);
+        }
+      }
+      state.toasts = newToasts;
+    },
+  },
 });
 
 // export functions

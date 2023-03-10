@@ -18,11 +18,8 @@
 
 .product-info img {
     width: 400px;
-    /* Replace with desired fixed width */
     height: 400px;
-    /* Replace with desired fixed height */
     object-fit: contain;
-    /* Keeps aspect ratio and fits image inside dimensions */
     margin-left: 32%;
 }
 

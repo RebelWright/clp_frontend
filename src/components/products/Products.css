@@ -1,25 +1,20 @@
 .product-list {
-    display: flex;
+  display: flex;
 }
 
 .product {
-    flex-basis: calc(33.33% - 2rem);
-    /* Adjust as needed */
-    margin: 1rem;
-    position: relative;
-    /* Add position relative to the product container */
+  flex-basis: calc(33.33% - 2rem);
+  position: relative;
 }
 
 .product-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .product-name {
-    /* Position the product name absolutely */
-    /* Position the top of the product name at the vertical center of the container */
-    left: 0;
-    right: 0;
-    text-align: center;
+  left: 0;
+  right: 0;
+  text-align: center;
 }

@@ -7,8 +7,8 @@ import Button from "../Button/Button";
 import { register } from "../slices/users.slice";
 
 interface Option {
-	label: string;
-	value: string;
+  label: string;
+  value: string;
 }
 const Register: React.FC<any> = () => {
   const dispatch = useDispatch<any>();
@@ -21,11 +21,11 @@ const Register: React.FC<any> = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [options, setOptions] = useState<Option[]>([]);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-  const [flagURL, setFlagURL] = useState<string>('');
+  const [flagURL, setFlagURL] = useState<string>("");
 
   const fetchOptions = async () => {
     try {
-      const response = await fetch('https://restcountries.com/v3.1/all');
+      const response = await fetch("https://restcountries.com/v3.1/all");
       const countries = await response.json();
 
       const newOptions = countries.map((country: any) => {
@@ -47,7 +47,9 @@ const Register: React.FC<any> = () => {
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
-    const selectedOption = options.find(option => option.value === selectedValue);
+    const selectedOption = options.find(
+      (option) => option.value === selectedValue
+    );
 
     if (selectedOption) {
       const flagURL = `https://countryflagsapi.com/png/${selectedOption.value}`;
@@ -55,140 +57,144 @@ const Register: React.FC<any> = () => {
       setSelectedOption(selectedOption);
     }
   };
-	const getMissingFields = () => {
-  const result: any = [];
+  const getMissingFields = () => {
+    const result: any = [];
 
-  if (!firstName) {
-    result.push("First Name");
-  }
-  if (!lastName) {
-    result.push("Last Name");
-  }
-  if (!email) {
-    result.push("Email");
-  }
-  if (!password) {
-    result.push("Password");
-  }
-
-  return result;
-};
-
-const handleLogin = async (e: any) => {
-  e.preventDefault();
-
-  // form validation
-  const missingFields = getMissingFields();
-  if (missingFields.length > 0) {
-    dispatch(
-      addToast({
-        status: "warning",
-        message: `Please enter values for ${missingFields}.`,
-      })
-    );
-  } else {
-    if (selectedOption) {
-      const flagURL = `https://countryflagsapi.com/png/${selectedOption.value}`;
-      setFlagURL(flagURL);
+    if (!firstName) {
+      result.push("First Name");
+    }
+    if (!lastName) {
+      result.push("Last Name");
+    }
+    if (!email) {
+      result.push("Email");
+    }
+    if (!password) {
+      result.push("Password");
     }
 
-    const payload = { email, password, firstName, lastName, flagURL };
+    return result;
+  };
 
-    // TODO: implement register logic
-    dispatch(register(payload));
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
 
-    dispatch(
-      addToast({
-        status: "success",
-        message: `Account successfully created.`,
-      })
-    );
+    // form validation
+    const missingFields = getMissingFields();
+    if (missingFields.length > 0) {
+      dispatch(
+        addToast({
+          status: "warning",
+          message: `Please enter values for ${missingFields}.`,
+        })
+      );
+    } else {
+      if (selectedOption) {
+        const flagURL = `https://countryflagsapi.com/png/${selectedOption.value}`;
+        setFlagURL(flagURL);
+      }
 
-    // reset field
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+      const payload = { email, password, firstName, lastName, flagURL };
 
-    // redirect to the login page
-    navigate("/login");
-  }
-};
+      // TODO: implement register logic
+      dispatch(register(payload));
 
-	return (
-		<div className="register">
-			<div className="container flex-column">
-				<h1>Welcome to Revature Books</h1>
+      dispatch(
+        addToast({
+          status: "success",
+          message: `Account successfully created.`,
+        })
+      );
 
-				<form className="flex-column" autoComplete="off">
-					<div className="flex-row">
-						<label htmlFor="firstName">First Name:</label>
-						<input
-							type="text"
-							id="firstName"
-							value={firstName}
-							onChange={(e: any) => setFirstName(e.target.value)}
-						/>
-					</div>
-					<div className="flex-row">
-						<label htmlFor="lastName">Last Name:</label>
-						<input
-							type="text"
-							id="lastName"
-							value={lastName}
-							onChange={(e: any) => setLastName(e.target.value)}
-						/>
-					</div>
-					<div className="flex-row">
-						<label htmlFor="email">Email:</label>
-						<input
-							type="email"
-							id="email"
-							value={email}
-							onChange={(e: any) => setEmail(e.target.value)}
-						/>
-					</div>
-					<div className="flex-row">
-						<label htmlFor="password">Password:</label>
-						<input
-							type="password"
-							id="password"
-							value={password}
-							onChange={(e: any) => setPassword(e.target.value)}
-						/>
-					</div>
-					<div className="flex-row">
-						<label htmlFor="confirmPassword">Confirm Password:</label>
-						<input
-							type="password"
-							id="confirmPassword"
-							value={confirmPassword}
-							onChange={(e: any) => setConfirmPassword(e.target.value)}
-						/>
-					</div>
-					
-					<div style={{ marginBottom: '20px' }}>
-					<select name="country" onChange={handleOptionChange} value={selectedOption?.value}>
-						<option value="">Select a country</option>
-						{options.map((option) => (
-						<option key={option.value} value={option.value}>
-							{option.label}
-						</option>
-						))}
-					</select>
-					{flagURL && <img src={flagURL} alt="flag" />}
-					</div>
-					<Button onClick={handleLogin} maxWidth>
-						Create Account
-					</Button>
-				</form>
-			</div>
-			<div className="register-footer">
-				<footer> Get Busy Bidding and Reading Today! </footer>
-			</div>
-		</div>
-	);
+      // reset field
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
+      // redirect to the login page
+      navigate("/login");
+    }
+  };
+
+  return (
+    <div className="register">
+      <div className="container flex-column">
+        <h1>Welcome to Revature Books</h1>
+
+        <form className="flex-column" autoComplete="off">
+          <div className="flex-row">
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              onChange={(e: any) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="flex-row">
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e: any) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="flex-row">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e: any) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="flex-row">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e: any) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex-row">
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e: any) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+
+          <div style={{ marginBottom: "20px" }}>
+            <select
+              name="country"
+              onChange={handleOptionChange}
+              value={selectedOption?.value}
+            >
+              <option value="">Select a country</option>
+              {options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {flagURL && <img src={flagURL} alt="flag" />}
+          </div>
+          <Button onClick={handleLogin} maxWidth>
+            Create Account
+          </Button>
+        </form>
+      </div>
+      <div className="register-footer">
+        <footer> Get Busy Bidding and Reading Today! </footer>
+      </div>
+    </div>
+  );
 };
 
 export default Register;
