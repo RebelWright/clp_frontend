@@ -1,0 +1,24 @@
+
+.home {
+	color: var(--secondary-blue);
+	margin: 0 auto;
+}
+
+.home-image {
+	display: flex;
+	justify-content: center;
+	padding: 2rem;
+}
+.home-container {
+	text-align: center;
+	align-content: center;
+}
+.home-animated {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
